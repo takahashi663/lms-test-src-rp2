@@ -60,8 +60,8 @@ public class Case03 {
 		final WebElement password = webDriver.findElement(By.name("password"));
 		final WebElement login = webDriver.findElement(By.className("btn"));
 		
-		//DBに未登録のIDとパスワードを入力	
-				String Id = "StudentAA011";
+		//初回ログイン済みのIDとパスワードを入力	
+				String Id = "StudentAA01";
 				String pass = "StudentAA011";
 				
 				loginId.clear();
@@ -73,11 +73,15 @@ public class Case03 {
 				login.click();
 				
 				
-				//コース詳細画面へ遷移
-				goTo("http://localhost:8080/lms/detail");
+				//ログイン後の表示待ち
+				visibilityTimeout(By.className("btn"), 10);
 				
 				//エビデンス取得
 				getEvidence(new Object() {});
+				
+				//ログインできているか確認
+				final String loginUser = webDriver.findElement(By.tagName("small")).getText();
+				assertEquals("ようこそ受講生ＡＡ１さん", loginUser);
 	}
 
 }
