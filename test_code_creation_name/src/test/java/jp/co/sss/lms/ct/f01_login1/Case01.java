@@ -1,8 +1,7 @@
 package jp.co.sss.lms.ct.f01_login1;
 
 import static jp.co.sss.lms.ct.util.WebDriverUtils.*;
-
-import java.time.Duration;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,10 +10,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * 結合テスト ログイン機能①
@@ -41,19 +36,16 @@ public class Case01 {
 	@Order(1)
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
-		ChromeDriver chromeDriver = new ChromeDriver();
-		
-		
-		// TODO ここに追加
-		
-		//URLを開く
-		chromeDriver.get("http://localhost:8080/lms");
+				//画面遷移
+				goTo("http://localhost:8080/lms");
 
-		
-		
-		WebDriverWait wait = new WebDriverWait(chromeDriver,Duration.ofSeconds(90));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("body")));
-		
+				//タイトルが一致しているかどうか
+				String title = webDriver.getTitle();
+				assertEquals("ログイン | LMS", title);
+
+				//ログイン画面のエビデンス取得
+				getEvidence(new Object() {});
+				
 	}
 	}
 
