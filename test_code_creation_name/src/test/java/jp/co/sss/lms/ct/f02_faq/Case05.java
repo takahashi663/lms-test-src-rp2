@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 
 /**
@@ -39,13 +40,54 @@ public class Case05 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
-	}
+		goTo("http://localhost:8080/lms");
+
+		//タイトルが一致しているかどうか
+		String title = webDriver.getTitle();
+		assertEquals("ログイン | LMS", title);
+
+		//ログイン画面のエビデンス取得
+		getEvidence(new Object() {});
+}
+	
 
 	@Test
 	@Order(2)
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
+		//ログインId パスワード ログインボタンを取得
+		final WebElement loginId = webDriver.findElement(By.name("loginId"));
+		final WebElement password = webDriver.findElement(By.name("password"));
+		final WebElement login = webDriver.findElement(By.className("btn"));
+
+String Id = "StudentAA01";
+String pass = "StudentAA0";
+
+loginId.clear();
+loginId.sendKeys(Id);
+password.clear();
+password.sendKeys(pass);
+
+//ログインボタンを押す
+
+login.click();
+
+
+//ログイン後の表示待ち
+visibilityTimeout(By.className("btn"), 10);
+
+//エビデンス取得
+getEvidence(new Object() {});
+
+//ログインできているか確認
+final String loginUser = webDriver.findElement(By.tagName("small")).getText();
+assertEquals("ようこそ受講生ＡＡ１さん", loginUser);
+
+//ログイン後の表示待ち
+		visibilityTimeout(By.className("btn"), 10);
+		getEvidence(new Object() {
+		});
 	}
 	
 	@Test
