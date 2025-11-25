@@ -62,7 +62,7 @@ public class Case03 {
 		
 		//初回ログイン済みのIDとパスワードを入力	
 				String Id = "StudentAA01";
-				String pass = "StudentAA011";
+				String pass = "StudentAA0";
 				
 				loginId.clear();
 				loginId.sendKeys(Id);
